@@ -129,16 +129,11 @@ void game_j1vsia(std::array<std::array<char,3>,3> & board,Player player1,Player 
      else if (equality_check(board)==true){
         break;
      }
-     std::cout<<"C'est au tour de l'IA"<<std::endl;
-     while (true) {
-        srand(static_cast<unsigned int>(time(0)));
-        destination = rand() % 9 + 1;
-        if ( board[destination/3][destination%3]!= 'X' && board[destination/3][destination%3]!= 'O') {
-            break;
-        }
-    }
+    std::cout<<"C'est au tour de l'IA"<<std::endl;
+    destination = ia_move(board,player2.symbol,player1.symbol);
     board[destination/3][destination%3]=player2.symbol;
-    }    if ( victory_check(board,player1)==true ){
+    }    
+    if ( victory_check(board,player1)==true ){
         std::cout<<player1.name<<" gagne la partie"<<std::endl;
     }
     else if ( victory_check(board,player2)){
@@ -157,7 +152,8 @@ void game(std::array<std::array<char,3>,3> & board){
     int mode;
     while (true) {
     std::cout<<"Mode de jeu : ";
-    std::cin >> mode;draw_game_board(board);
+    std::cin >> mode;
+    draw_game_board(board);
     if (mode == 1 || mode == 2) {
         break;
     } 
